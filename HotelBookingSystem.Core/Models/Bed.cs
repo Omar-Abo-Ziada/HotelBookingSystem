@@ -1,6 +1,4 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
-
-namespace HotelBookingSystem.Core.Models
+﻿namespace HotelBookingSystem.Core.Models
 {
     public class Bed
     {

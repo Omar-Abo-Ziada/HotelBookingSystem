@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace HotelBookingSystem.EF.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240718212506_Init")]
+    [Migration("20240719134102_Init")]
     partial class Init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -311,6 +311,36 @@ namespace HotelBookingSystem.EF.Migrations
                         });
                 });
 
+            modelBuilder.Entity("HotelBookingSystem.Core.Models.Booking", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<int>("BranchID")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("CheckIn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("CheckOut")
+                        .HasColumnType("datetime2");
+
+                    b.Property<decimal>("Discount")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<bool>("IsPreviousCustomer")
+                        .HasColumnType("bit");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("BranchID");
+
+                    b.ToTable("Bookings");
+                });
+
             modelBuilder.Entity("HotelBookingSystem.Core.Models.Branch", b =>
                 {
                     b.Property<int>("ID")
@@ -512,16 +542,7 @@ namespace HotelBookingSystem.EF.Migrations
                     b.Property<int>("AgeCategory")
                         .HasColumnType("int");
 
-                    b.Property<int?>("BranchID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("CheckIn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("CheckOut")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsPreviousCutomer")
+                    b.Property<bool>("IsPreviousCustomer")
                         .HasColumnType("bit");
 
                     b.Property<string>("Name")
@@ -533,24 +554,29 @@ namespace HotelBookingSystem.EF.Migrations
                         .HasMaxLength(14)
                         .HasColumnType("nvarchar(14)");
 
-                    b.Property<int?>("NumberOfRooms")
-                        .HasColumnType("int");
-
                     b.Property<string>("PhoneNumber")
                         .IsRequired()
                         .HasMaxLength(11)
                         .HasColumnType("nvarchar(11)");
 
-                    b.Property<int?>("RoomID")
-                        .HasColumnType("int");
-
                     b.HasKey("ID");
 
-                    b.HasIndex("BranchID");
-
-                    b.HasIndex("RoomID");
-
                     b.ToTable("Customers");
+                });
+
+            modelBuilder.Entity("HotelBookingSystem.Core.Models.CustomerBooking", b =>
+                {
+                    b.Property<int>("CustomerID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("BookingID")
+                        .HasColumnType("int");
+
+                    b.HasKey("CustomerID", "BookingID");
+
+                    b.HasIndex("BookingID");
+
+                    b.ToTable("CustomerBookings");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Core.Models.Employee", b =>
@@ -1079,16 +1105,24 @@ namespace HotelBookingSystem.EF.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
+                    b.Property<int?>("BookingID")
+                        .HasColumnType("int");
+
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
-                    b.Property<int>("NumberOfBeds")
+                    b.Property<int>("NumberOfAdults")
+                        .HasColumnType("int");
+
+                    b.Property<int>("NumberOfChilds")
                         .HasColumnType("int");
 
                     b.Property<int>("Type")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("BookingID");
 
                     b.HasIndex("BranchID");
 
@@ -1099,140 +1133,192 @@ namespace HotelBookingSystem.EF.Migrations
                         {
                             Id = 1,
                             BranchID = 1,
-                            NumberOfBeds = 1,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 0
                         },
                         new
                         {
                             Id = 2,
                             BranchID = 1,
-                            NumberOfBeds = 2,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 21,
+                            BranchID = 1,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 1
+                        },
+                        new
+                        {
+                            Id = 22,
+                            BranchID = 1,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 23,
+                            BranchID = 1,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
                         },
                         new
                         {
                             Id = 3,
                             BranchID = 2,
-                            NumberOfBeds = 3,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 2
                         },
                         new
                         {
                             Id = 4,
                             BranchID = 2,
-                            NumberOfBeds = 1,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 0
+                        },
+                        new
+                        {
+                            Id = 24,
+                            BranchID = 2,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
                         },
                         new
                         {
                             Id = 5,
                             BranchID = 3,
-                            NumberOfBeds = 2,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 1
                         },
                         new
                         {
                             Id = 6,
                             BranchID = 3,
-                            NumberOfBeds = 3,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 2
                         },
                         new
                         {
                             Id = 7,
-                            BranchID = 1,
-                            NumberOfBeds = 1,
+                            BranchID = 4,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 0
                         },
                         new
                         {
                             Id = 8,
-                            BranchID = 1,
-                            NumberOfBeds = 2,
+                            BranchID = 4,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 1
                         },
                         new
                         {
                             Id = 9,
-                            BranchID = 2,
-                            NumberOfBeds = 3,
+                            BranchID = 5,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 2
                         },
                         new
                         {
                             Id = 10,
-                            BranchID = 2,
-                            NumberOfBeds = 1,
+                            BranchID = 5,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 0
                         },
                         new
                         {
                             Id = 11,
-                            BranchID = 3,
-                            NumberOfBeds = 2,
+                            BranchID = 6,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 1
                         },
                         new
                         {
                             Id = 12,
-                            BranchID = 3,
-                            NumberOfBeds = 3,
+                            BranchID = 7,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 2
                         },
                         new
                         {
                             Id = 13,
-                            BranchID = 1,
-                            NumberOfBeds = 1,
+                            BranchID = 8,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 0
                         },
                         new
                         {
                             Id = 14,
-                            BranchID = 1,
-                            NumberOfBeds = 2,
+                            BranchID = 9,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 1
                         },
                         new
                         {
                             Id = 15,
-                            BranchID = 2,
-                            NumberOfBeds = 3,
+                            BranchID = 10,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 2
                         },
                         new
                         {
                             Id = 16,
-                            BranchID = 2,
-                            NumberOfBeds = 1,
+                            BranchID = 11,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 0
                         },
                         new
                         {
                             Id = 17,
-                            BranchID = 3,
-                            NumberOfBeds = 2,
+                            BranchID = 12,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 1
                         },
                         new
                         {
                             Id = 18,
-                            BranchID = 3,
-                            NumberOfBeds = 3,
+                            BranchID = 13,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 2
                         },
                         new
                         {
                             Id = 19,
-                            BranchID = 1,
-                            NumberOfBeds = 1,
+                            BranchID = 13,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 0
                         },
                         new
                         {
                             Id = 20,
-                            BranchID = 1,
-                            NumberOfBeds = 2,
+                            BranchID = 13,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
                             Type = 1
                         });
                 });
@@ -1262,6 +1348,36 @@ namespace HotelBookingSystem.EF.Migrations
                         .HasFilter("[NormalizedName] IS NOT NULL");
 
                     b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = "1",
+                            ConcurrencyStamp = "fe0f81c0-e65e-4f06-93db-f4ebfd47b80e",
+                            Name = "Customer",
+                            NormalizedName = "CUSTOMER"
+                        },
+                        new
+                        {
+                            Id = "2",
+                            ConcurrencyStamp = "5672a166-aea2-4a29-a728-8703ab29576e",
+                            Name = "Employee",
+                            NormalizedName = "EMPLOYEE"
+                        },
+                        new
+                        {
+                            Id = "3",
+                            ConcurrencyStamp = "807771d3-8839-4af2-a750-688331a5a5e2",
+                            Name = "Admin",
+                            NormalizedName = "ADMIN"
+                        },
+                        new
+                        {
+                            Id = "4",
+                            ConcurrencyStamp = "24b4a14e-0dd9-4265-af23-b233bc35ac18",
+                            Name = "SuperAdmin",
+                            NormalizedName = "SUPERADMIN"
+                        });
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -1390,6 +1506,17 @@ namespace HotelBookingSystem.EF.Migrations
                     b.Navigation("Room");
                 });
 
+            modelBuilder.Entity("HotelBookingSystem.Core.Models.Booking", b =>
+                {
+                    b.HasOne("HotelBookingSystem.Core.Models.Branch", "Branch")
+                        .WithMany("Bookings")
+                        .HasForeignKey("BranchID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Branch");
+                });
+
             modelBuilder.Entity("HotelBookingSystem.Core.Models.Branch", b =>
                 {
                     b.HasOne("HotelBookingSystem.Core.Models.Hotel", "Hotel")
@@ -1401,19 +1528,23 @@ namespace HotelBookingSystem.EF.Migrations
                     b.Navigation("Hotel");
                 });
 
-            modelBuilder.Entity("HotelBookingSystem.Core.Models.Customer", b =>
+            modelBuilder.Entity("HotelBookingSystem.Core.Models.CustomerBooking", b =>
                 {
-                    b.HasOne("HotelBookingSystem.Core.Models.Branch", "Branch")
-                        .WithMany("Customers")
-                        .HasForeignKey("BranchID");
+                    b.HasOne("HotelBookingSystem.Core.Models.Booking", "Booking")
+                        .WithMany("CustomerBookings")
+                        .HasForeignKey("BookingID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("HotelBookingSystem.Core.Models.Room", "Room")
-                        .WithMany("Customers")
-                        .HasForeignKey("RoomID");
+                    b.HasOne("HotelBookingSystem.Core.Models.Customer", "Customer")
+                        .WithMany("CustomerBookings")
+                        .HasForeignKey("CustomerID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.Navigation("Branch");
+                    b.Navigation("Booking");
 
-                    b.Navigation("Room");
+                    b.Navigation("Customer");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Core.Models.Employee", b =>
@@ -1429,11 +1560,17 @@ namespace HotelBookingSystem.EF.Migrations
 
             modelBuilder.Entity("HotelBookingSystem.Core.Models.Room", b =>
                 {
+                    b.HasOne("HotelBookingSystem.Core.Models.Booking", "Booking")
+                        .WithMany("Rooms")
+                        .HasForeignKey("BookingID");
+
                     b.HasOne("HotelBookingSystem.Core.Models.Branch", "Branch")
                         .WithMany("Rooms")
                         .HasForeignKey("BranchID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("Booking");
 
                     b.Navigation("Branch");
                 });
@@ -1489,9 +1626,16 @@ namespace HotelBookingSystem.EF.Migrations
                         .IsRequired();
                 });
 
+            modelBuilder.Entity("HotelBookingSystem.Core.Models.Booking", b =>
+                {
+                    b.Navigation("CustomerBookings");
+
+                    b.Navigation("Rooms");
+                });
+
             modelBuilder.Entity("HotelBookingSystem.Core.Models.Branch", b =>
                 {
-                    b.Navigation("Customers");
+                    b.Navigation("Bookings");
 
                     b.Navigation("Employees");
 
@@ -1501,6 +1645,8 @@ namespace HotelBookingSystem.EF.Migrations
             modelBuilder.Entity("HotelBookingSystem.Core.Models.Customer", b =>
                 {
                     b.Navigation("ApplicationUser");
+
+                    b.Navigation("CustomerBookings");
                 });
 
             modelBuilder.Entity("HotelBookingSystem.Core.Models.Hotel", b =>
@@ -1511,8 +1657,6 @@ namespace HotelBookingSystem.EF.Migrations
             modelBuilder.Entity("HotelBookingSystem.Core.Models.Room", b =>
                 {
                     b.Navigation("Beds");
-
-                    b.Navigation("Customers");
                 });
 #pragma warning restore 612, 618
         }

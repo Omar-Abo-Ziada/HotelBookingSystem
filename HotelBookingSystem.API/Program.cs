@@ -154,6 +154,11 @@ namespace HotelBookingSystem.API
             builder.Services.AddScoped(typeof(IGenericRepository<>), typeof(GenericRepository<>));
 
             builder.Services.AddScoped<ICustomerRepository , CustomerRepository>();
+            builder.Services.AddScoped<IHotelRepository , HotelRepository>();
+            builder.Services.AddScoped<IBranchRepository , BranchRepository>();
+            builder.Services.AddScoped<IBookingRepository , BookingRepository>();
+            builder.Services.AddScoped<ICustomerBookingRepository , CustomerBookingRepository>();
+            builder.Services.AddScoped<IRoomRepository , RoomRepository>();
 
             //***************************************************************
             var app = builder.Build();

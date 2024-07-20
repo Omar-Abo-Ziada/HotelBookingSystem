@@ -1,18 +1,17 @@
-﻿namespace HotelBookingSystem.Core.Models
+﻿namespace HotelBookingSystem.Core.DTOs
 {
-    public class CustomerBooking
+    public class GetCustomerBookingDTO
     {
-
         //------------------------------------------
 
         public int CustomerID { get; set; }
 
-        public Customer Customer { get; set; }
+        //public Customer Customer { get; set; }
 
         //------------------------------------------
 
         public int BookingID { get; set; }
 
-        public Booking Booking { get; set; }
+        //public Booking Booking { get; set; }
     }
 }

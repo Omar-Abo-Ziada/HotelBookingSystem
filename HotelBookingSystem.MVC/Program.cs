@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
+
 namespace HotelBookingSystem.MVC
 {
     public class Program
@@ -6,8 +8,33 @@ namespace HotelBookingSystem.MVC
         {
             var builder = WebApplication.CreateBuilder(args);
 
+            //builder.Services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+            //.AddCookie(options =>
+            //{
+            //    options.Cookie.Name = "Hotel.Cookie";
+            //    options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(30); // Adjust as needed
+            //    options.LoginPath = "/Account/Login"; 
+            //    options.AccessDeniedPath = "/Account/AccessDenied"; 
+            //    options.SlidingExpiration = true;
+            //});
+
+            builder.Services.AddSession(options =>
+            {
+                options.IdleTimeout = TimeSpan.FromMinutes(30);
+                options.Cookie.HttpOnly = true;
+                options.Cookie.IsEssential = true;
+            });
+
+
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+
+            //*************************************************
+
+            builder.Services.AddHttpClient();
+          
+            //*************************************************
 
             var app = builder.Build();
 
@@ -16,11 +43,17 @@ namespace HotelBookingSystem.MVC
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseHttpsRedirection();
+
             app.UseStaticFiles();
 
             app.UseRouting();
 
+            app.UseAuthentication();
             app.UseAuthorization();
+
+            app.UseSession();
 
             app.MapControllerRoute(
                 name: "default",

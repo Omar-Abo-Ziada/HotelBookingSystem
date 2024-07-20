@@ -9,9 +9,13 @@ namespace HotelBookingSystem.EF
     {
         public virtual DbSet<Bed> Beds { get; set; }
 
+        public virtual DbSet<Booking> Bookings { get; set; }
+
         public virtual DbSet<Branch> Branches { get; set; }
 
         public virtual DbSet<Customer> Customers { get; set; }
+
+        public virtual DbSet<CustomerBooking> CustomerBookings { get; set; }
 
         public virtual DbSet<Employee> Employees { get; set; }
 

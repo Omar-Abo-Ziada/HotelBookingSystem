@@ -12,7 +12,7 @@ using System.Text;
 
 namespace HotelBookingSystem.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class AccountController : ControllerBase
     {
@@ -29,7 +29,7 @@ namespace HotelBookingSystem.API.Controllers
 
         //**********************************************
 
-        [HttpPost("register")]
+        [HttpPost]
         public async Task<ActionResult<GeneralResponse>> Register(RegisterUserDTO userDTO)
         {
             if (ModelState.IsValid)
@@ -90,8 +90,9 @@ namespace HotelBookingSystem.API.Controllers
                     return new GeneralResponse()
                     {
                         IsSuccess = true,
-                        Data = user.Id,
-                        Message = "Account Created and Customer Added  Successfully"
+                        Data = customer.ID,
+                        Message = "Account Created and Customer Added  Successfully , " +
+                        "here is the customer ID store it in session storage"
                     };
                 }
                 else
@@ -115,7 +116,7 @@ namespace HotelBookingSystem.API.Controllers
             }
         }
 
-        [HttpPost("login")]
+        [HttpPost]
         public async Task<ActionResult<GeneralResponse>> Login(LogInUserDTO userDTO)
         {
             if (ModelState.IsValid)
@@ -180,10 +181,11 @@ namespace HotelBookingSystem.API.Controllers
                         return new GeneralResponse()
                         {
                             IsSuccess = true,
-                            Data = null,
+                            Data = userFromDB.CustomerID,
                             Token = new JwtSecurityTokenHandler().WriteToken(jwtSecurityToken),
                             Expired = jwtSecurityToken.ValidTo,
-                            Message = "Token Created Successfully"
+                            Message = "Token Created Successfully ," +
+                            "here is the customer ID : Store it in Session Storage"
                         };
                     }
                     else

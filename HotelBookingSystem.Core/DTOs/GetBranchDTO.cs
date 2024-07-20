@@ -1,6 +1,8 @@
-﻿namespace HotelBookingSystem.Core.Models
+﻿using HotelBookingSystem.Core.Models;
+
+namespace HotelBookingSystem.Core.DTOs
 {
-    public class Branch
+    public class GetBranchDTO
     {
         public int ID { get; set; }
 
@@ -16,19 +18,18 @@
 
         //--------------------------------------
 
-        public ICollection<Room> Rooms { get; set; } = new HashSet<Room>();
+        //public ICollection<Room> Rooms { get; set; } = new HashSet<Room>();
 
-        public ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
+        //public ICollection<Employee> Employees { get; set; } = new HashSet<Employee>();
 
         //public ICollection<Customer> Customers { get; set; } = new HashSet<Customer>();
 
-        public ICollection<Booking> Bookings { get; set; } = new HashSet<Booking>();
+        //public ICollection<Booking> Bookings { get; set; } = new HashSet<Booking>();
 
         //--------------------------------------
 
-        //[ForeignKey("Hotel")]
         public int HotelID { get; set; }
 
-        public Hotel Hotel { get; set; }
+        //public Hotel Hotel { get; set; }
     }
 }

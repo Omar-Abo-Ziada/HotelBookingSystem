@@ -34,13 +34,13 @@ namespace HotelBookingSystem.API.Controllers
                     Name = customer.Name,
                     NationalID = customer.NationalID,
                     AgeCategory = customer.AgeCategory,
-                    CheckIn = customer.CheckIn,
-                    CheckOut = customer.CheckOut,
-                    BranchID = customer.BranchID ?? 0,
-                    IsPreviousCutomer = customer.IsPreviousCutomer,
-                    NumberOfRooms = customer.NumberOfRooms,
+                    //CheckIn = customer.CheckIn,
+                    //CheckOut = customer.CheckOut,
+                    //BranchID = customer.BranchID ?? 0,
+                    //IsPreviousCutomer = customer.IsPreviousCutomer,
+                    //NumberOfRooms = customer.NumberOfRooms,
                     PhoneNumber = customer.PhoneNumber,
-                    RoomID = customer.RoomID ?? 0,
+                    //RoomID = customer.RoomID ?? 0,
                 };
 
                 customerDTOs.Add(dto);
@@ -74,13 +74,13 @@ namespace HotelBookingSystem.API.Controllers
                 Name = customer.Name,
                 NationalID = customer.NationalID,
                 AgeCategory = customer.AgeCategory,
-                CheckIn = customer.CheckIn,
-                CheckOut = customer.CheckOut,
-                BranchID = customer.BranchID ?? 0,
-                IsPreviousCutomer = customer.IsPreviousCutomer,
-                NumberOfRooms = customer.NumberOfRooms,
+                //CheckIn = customer.CheckIn,
+                //CheckOut = customer.CheckOut,
+                //BranchID = customer.BranchID ?? 0,
+                //IsPreviousCutomer = customer.IsPreviousCutomer,
+                //NumberOfRooms = customer.NumberOfRooms,
                 PhoneNumber = customer.PhoneNumber,
-                RoomID = customer.RoomID ?? 0,
+                //RoomID = customer.RoomID ?? 0,
             };
 
 
