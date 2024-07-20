@@ -6,7 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace HotelBookingSystem.API.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("api/[controller]/[action]")]
     [ApiController]
     public class CustomerController : ControllerBase
     {
@@ -34,13 +34,7 @@ namespace HotelBookingSystem.API.Controllers
                     Name = customer.Name,
                     NationalID = customer.NationalID,
                     AgeCategory = customer.AgeCategory,
-                    //CheckIn = customer.CheckIn,
-                    //CheckOut = customer.CheckOut,
-                    //BranchID = customer.BranchID ?? 0,
-                    //IsPreviousCutomer = customer.IsPreviousCutomer,
-                    //NumberOfRooms = customer.NumberOfRooms,
                     PhoneNumber = customer.PhoneNumber,
-                    //RoomID = customer.RoomID ?? 0,
                 };
 
                 customerDTOs.Add(dto);
@@ -74,13 +68,7 @@ namespace HotelBookingSystem.API.Controllers
                 Name = customer.Name,
                 NationalID = customer.NationalID,
                 AgeCategory = customer.AgeCategory,
-                //CheckIn = customer.CheckIn,
-                //CheckOut = customer.CheckOut,
-                //BranchID = customer.BranchID ?? 0,
-                //IsPreviousCutomer = customer.IsPreviousCutomer,
-                //NumberOfRooms = customer.NumberOfRooms,
                 PhoneNumber = customer.PhoneNumber,
-                //RoomID = customer.RoomID ?? 0,
             };
 
 

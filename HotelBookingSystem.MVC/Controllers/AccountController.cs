@@ -1,12 +1,9 @@
 ﻿using HotelBookingSystem.Core.DTOs;
 using HotelBookingSystem.MVC.Models;
-using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using NuGet.Protocol;
-using System.Security.Claims;
-using Microsoft.AspNetCore.Authorization;
 using System.Text;
 
 namespace HotelBookingSystem.MVC.Controllers
@@ -35,6 +32,8 @@ namespace HotelBookingSystem.MVC.Controllers
         [HttpGet]
         public IActionResult Register()
         {
+            Logout();
+
             return View("Register");
         }
 
@@ -56,18 +55,15 @@ namespace HotelBookingSystem.MVC.Controllers
                     string jsonResponse = await httpResponse.Content.ReadAsStringAsync();
 
                     // Deserialize the entire response into GeneralResponse
-                    GeneralResponse generalResponse = JsonConvert.DeserializeObject<GeneralResponse>(jsonResponse);
+                    GeneralResponse? generalResponse = JsonConvert.DeserializeObject<GeneralResponse>(jsonResponse);
 
-                    if (generalResponse.IsSuccess)
+                    if (generalResponse?.IsSuccess ?? false)
                     {
-                        HttpContext.Session.Set("CustomerID", Encoding.UTF8.GetBytes(generalResponse.Data.ToJson()));
-
-                        return View("Login");
+                        return RedirectToAction("RegisterSuccess");
                     }
                     else
                     {
-                        // Handle unsuccessful response
-                        ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                        ModelState.AddModelError(string.Empty, $"Server : {generalResponse.Data}");
                     }
                 }
                 else
@@ -84,18 +80,17 @@ namespace HotelBookingSystem.MVC.Controllers
             return View();
         }
 
-
         [HttpGet]
         public IActionResult Login()
         {
-            return View();
+            return Logout();
         }
-
 
         [HttpPost]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Login(LogInUserDTO userVM)
         {
+
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
@@ -110,50 +105,28 @@ namespace HotelBookingSystem.MVC.Controllers
                     string jsonResponse = await httpResponse.Content.ReadAsStringAsync();
 
                     // Deserialize the entire response into GeneralResponse
-                    GeneralResponse generalResponse = JsonConvert.DeserializeObject<GeneralResponse>(jsonResponse);
+                    GeneralResponse? generalResponse = JsonConvert.DeserializeObject<GeneralResponse>(jsonResponse);
 
-                    if (generalResponse.IsSuccess)
+                    if (generalResponse?.IsSuccess ?? false)
                     {
-                //        // Set authentication cookie
-                //        var claims = new List<Claim>
-                //{
-                //    new Claim(ClaimTypes.Name, userVM.UserName), // Assuming Username is part of your claims
-                //    // Add more claims as needed
-                //};
-
-                //        var claimsIdentity = new ClaimsIdentity(
-                //            claims, CookieAuthenticationDefaults.AuthenticationScheme);
-
-                //        var authProperties = new AuthenticationProperties
-                //        {
-                //            IsPersistent = true, // Persist the cookie
-                //            ExpiresUtc = DateTimeOffset.UtcNow.AddMinutes(30) // Cookie expiration time
-                //        };
-
-                //        await HttpContext.SignInAsync(
-                //            CookieAuthenticationDefaults.AuthenticationScheme,
-                //            new ClaimsPrincipal(claimsIdentity),
-                //            authProperties);
-
                         // Set session variables
-                        HttpContext.Session.SetString("Token", generalResponse.Token);
-                        HttpContext.Session.SetString("TokenExpires", generalResponse.Expired.ToString());
+                        HttpContext.Session.SetString("Token", generalResponse?.Token ?? string.Empty);
+                        HttpContext.Session.SetString("TokenExpires", generalResponse?.Expired?.ToString() ?? string.Empty);
 
-                        long customerIdLong = generalResponse.Data; // Assuming generalResponse.Data is of type long
+                        long customerIdLong = generalResponse?.Data; // Assuming generalResponse.Data is of type long
 
                         // Explicitly convert long to int
                         int customerId = (int)customerIdLong;
 
                         // Store in session
-                        HttpContext.Session.SetInt32("CustomerID", customerId);
+                        HttpContext.Session.SetString("CustomerID", customerId.ToString());
 
                         return RedirectToAction("LoginSuccess");
                     }
                     else
                     {
-                        // Handle unsuccessful response
-                        ViewBag.ResponseMessage = "Invalid Credentials or Login Failed";
-                        ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                        ModelState.AddModelError(string.Empty, "Invalid User name or Password , Try Again ...");
+                        //ModelState.AddModelError(string.Empty, $"Server Message : {generalResponse?.Message??string.Empty}");
                     }
                 }
                 else
@@ -172,6 +145,13 @@ namespace HotelBookingSystem.MVC.Controllers
             return View();
         }
 
+        [HttpGet]
+        [AllowAnonymous]
+        [Route("account/RegisterSuccess")]
+        public IActionResult RegisterSuccess()
+        {
+            return View();
+        }
 
         [HttpGet]
         [AllowAnonymous]
@@ -195,5 +175,40 @@ namespace HotelBookingSystem.MVC.Controllers
 
             return Content($"Token found in the session: {token} and the Expire Date: {tokenExpired}");
         }
+
+        private bool CheckSessionToken()
+        {
+            var token = HttpContext.Session.GetString("Token");
+            var tokenExpired = HttpContext.Session.GetString("TokenExpires");
+
+            if (string.IsNullOrEmpty(token))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public IActionResult Logout()
+        {
+            bool tokenExisted = CheckSessionToken();
+
+            if (tokenExisted)
+            {
+                // clear session first before registering new customer
+                HttpContext.Session.Clear();
+            }
+
+            // to make sure Session is Empty :
+
+            bool tokenExistedAgain = CheckSessionToken();
+
+            if (tokenExistedAgain)
+            {
+                throw new Exception("Can't Clear Session before Regisering a new User .");
+            }
+
+            return View("Login");
+        }
+
     }
 }

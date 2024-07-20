@@ -68,6 +68,8 @@ namespace HotelBookingSystem.API.Controllers
         {
             Booking? booking = bookingRepository.GetById(id);
 
+            int customerID = customerBookingRepository.Find(criteria: cb => cb.BookingID == id).CustomerID;
+
             if (booking is null)
             {
                 return new GeneralResponse
@@ -77,18 +79,87 @@ namespace HotelBookingSystem.API.Controllers
                 };
             }
 
-            GetBookingDTO getBookingDTO = new GetBookingDTO()
+            List<Room> rooms = roomRepository.FindAll(criteria: r => r.BookingID == id).ToList();
+
+            List<GetRoomDTO> getRoomDTOs = new List<GetRoomDTO>(rooms.Count);
+
+            foreach (Room room in rooms)
+            {
+                GetRoomDTO roomDTO = new GetRoomDTO()
+                {
+                    Id = room.Id,
+                    BookingID = room.BookingID ,
+                    BranchID = room.BranchID ,
+                    Type = room.Type,
+                    NumberOfAdults = room.NumberOfAdults,
+                    NumberOfChilds = room.NumberOfChilds,
+                    IsBooked = room.IsBooked,
+                };
+
+                getRoomDTOs.Add(roomDTO);
+            }
+
+            GetBookingWithRoomsDTO getBookingWithRoomsDTO = new GetBookingWithRoomsDTO()
             {
                 ID = booking.ID,
                 CheckIn = booking.CheckIn,
                 CheckOut = booking.CheckOut,
                 BranchID = booking.BranchID,
+                Discount = booking.Discount,
+                IsPreviousCustomer = booking.IsPreviousCustomer,
+                CustomerID = customerID,
+
+                Rooms = getRoomDTOs 
             };
 
             return new GeneralResponse()
             {
                 IsSuccess = true,
-                Data = getBookingDTO,
+                Data = getBookingWithRoomsDTO,
+            };
+        }
+
+        [HttpGet("{customerID:int}")]
+        public ActionResult<GeneralResponse> GetByCustomerID(int customerID)
+        {
+            List<int> bookingsIDs = customerBookingRepository
+                .FindAll(criteria: cb => cb.CustomerID == customerID)
+                .Select(cb => cb.BookingID)
+                .ToList();
+
+            List<Booking>? bookings = bookingRepository.FindAll(criteria: b => bookingsIDs.Contains(b.ID)).ToList();
+
+            if (bookings is null || !bookings.Any())
+            {
+                return new GeneralResponse
+                {
+                    IsSuccess = false,
+                    Message = $"There is no bookings found with for this Customer ID : ({customerID}) !"
+                };
+            }
+
+            List<GetBookingDTO> getBookingDTOs = new List<GetBookingDTO>(bookings.Count);
+
+            foreach (Booking booking in bookings)
+            {
+                GetBookingDTO DTO = new GetBookingDTO()
+                {
+                    ID = booking.ID,
+                    BranchID = booking.BranchID,
+                    CheckIn = booking.CheckIn,
+                    CheckOut = booking.CheckOut,
+                    CustomerID = customerID,
+                    Discount = booking.Discount,
+                    IsPreviousCustomer = booking.IsPreviousCustomer
+                };
+
+                getBookingDTOs.Add(DTO);
+            }
+
+            return new GeneralResponse()
+            {
+                IsSuccess = true,
+                Data = getBookingDTOs,
             };
         }
 
@@ -146,7 +217,9 @@ namespace HotelBookingSystem.API.Controllers
                 };
             }
 
-            if (customerRepository.GetById(postBookingDTO.customerID) is null)
+            Customer? customer = customerRepository.GetById(postBookingDTO.customerID);
+
+            if (customer is null)
             {
                 return new GeneralResponse()
                 {
@@ -301,6 +374,9 @@ namespace HotelBookingSystem.API.Controllers
             {
                 booking.IsPreviousCustomer = true;
                 booking.Discount = 0.05m;
+
+                customer.IsPreviousCustomer = true;
+                customerBookingRepository.Save();
             }
 
             bookingRepository.Add(booking);

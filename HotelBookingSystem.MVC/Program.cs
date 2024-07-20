@@ -32,6 +32,10 @@ namespace HotelBookingSystem.MVC
 
             //*************************************************
 
+            builder.Logging.ClearProviders();
+            builder.Logging.AddConsole();
+            builder.Logging.AddDebug();
+
             builder.Services.AddHttpClient();
           
             //*************************************************

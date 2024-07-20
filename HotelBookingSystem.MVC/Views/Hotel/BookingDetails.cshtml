@@ -1,0 +1,111 @@
+﻿@model HotelBookingSystem.Core.DTOs.GetBookingWithRoomsDTO
+
+@{
+    ViewData["Title"] = "BookingDetails";
+}
+
+<h1>Booking Details</h1>
+
+<div>
+    <hr />
+    <dl class="row">
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.ID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.ID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CheckIn)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CheckIn)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CheckOut)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CheckOut)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.Discount)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.Discount)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.IsPreviousCustomer)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.IsPreviousCustomer)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.BranchID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.BranchID)
+        </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model => model.CustomerID)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model => model.CustomerID)
+        </dd>
+    </dl>
+</div>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms.FirstOrDefault().Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms.FirstOrDefault().Type)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms.FirstOrDefault().NumberOfAdults)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms.FirstOrDefault().NumberOfChilds)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms.FirstOrDefault().BranchID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms.FirstOrDefault().BookingID)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rooms.FirstOrDefault().IsBooked)
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var room in Model.Rooms)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => room.Id)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.Type)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.NumberOfAdults)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.NumberOfChilds)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.BranchID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.BookingID)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => room.IsBooked)
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

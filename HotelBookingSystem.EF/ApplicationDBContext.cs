@@ -1,12 +1,15 @@
 ﻿using HotelBookingSystem.Core.Models;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 using System.ComponentModel.DataAnnotations;
 
 namespace HotelBookingSystem.EF
 {
     public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
     {
+        private readonly IConfiguration Configuration;
+
         public virtual DbSet<Bed> Beds { get; set; }
 
         public virtual DbSet<Booking> Bookings { get; set; }
@@ -23,19 +26,22 @@ namespace HotelBookingSystem.EF
 
         public virtual DbSet<Room> Rooms { get; set; }
 
-        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options) : base(options) { }
+        public ApplicationDBContext(DbContextOptions<ApplicationDBContext> options , IConfiguration configuration) : base(options)
+        {
+            Configuration = configuration;
+        }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDBContext).Assembly);
+
             ///By default, EF Core uses TPH inheritance where all classes in the hierarchy are stored in a single table. 
             ///So To solve this and make the cutomer Type has his own table => Use Table-per-Type (TPT) Inheritance:
             ///configuring the Customer entity to be mapped to a separate table. EF Core 5.0 and later supports TPT.
             //modelBuilder.Entity<Customer>()
             //         .ToTable("Customers");
-
-            base.OnModelCreating(modelBuilder);
-
-            modelBuilder.ApplyConfigurationsFromAssembly(typeof(ApplicationDBContext).Assembly);
         }
 
         ///<summary>
@@ -66,5 +72,22 @@ namespace HotelBookingSystem.EF
             return 0;  // indication for 0 entries added or updated >> saving didnot happen due to validation errors >> when call savechanges() check return != 0
 
         }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            base.OnConfiguring(optionsBuilder);
+
+            // The seed entity for entity type 'Room' cannot be added because another seed entity with the same key value for {'Id'} has already been added.
+            // Consider using 'DbContextOptionsBuilder.EnableSensitiveDataLogging' to see the conflicting key values.
+
+            if (!optionsBuilder.IsConfigured)
+            {
+                optionsBuilder.UseSqlServer(
+                   Configuration.GetConnectionString("DefaultConnection"))
+                  .EnableSensitiveDataLogging();
+
+            }
+        }
+   
     }
 }

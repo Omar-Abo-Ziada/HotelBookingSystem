@@ -1,5 +1,5 @@
 ﻿using HotelBookingSystem.Core.Enums;
-using HotelBookingSystem.Core.Models;
+using System.ComponentModel.DataAnnotations;
 
 namespace HotelBookingSystem.Core.DTOs
 {
@@ -7,12 +7,16 @@ namespace HotelBookingSystem.Core.DTOs
     {
         //public int Id { get; set; }
 
+        [Required]
         public RoomType Type { get; set; }
 
         //public int NumberOfBeds { get; set; }
-
+        [Required]
+        [Range(0 , maximum:10, ErrorMessage ="Must be from Zero to 10")]
         public int NumberOfAdults { get; set; }
 
+        [Required]
+        [Range(0, maximum: 10, ErrorMessage = "Must be from Zero to 10")]
         public int NumberOfChilds { get; set; }
 
         //-------------------------------------

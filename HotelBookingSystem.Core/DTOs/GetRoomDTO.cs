@@ -1,5 +1,4 @@
 ﻿using HotelBookingSystem.Core.Enums;
-using HotelBookingSystem.Core.Models;
 
 namespace HotelBookingSystem.Core.DTOs
 {
@@ -38,3 +37,4 @@ namespace HotelBookingSystem.Core.DTOs
         //public Booking? Booking { get; set; }
     }
 }
+

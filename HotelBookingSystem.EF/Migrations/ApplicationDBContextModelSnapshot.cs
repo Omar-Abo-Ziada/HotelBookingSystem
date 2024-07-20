@@ -320,10 +320,10 @@ namespace HotelBookingSystem.EF.Migrations
                     b.Property<int>("BranchID")
                         .HasColumnType("int");
 
-                    b.Property<DateTime?>("CheckIn")
+                    b.Property<DateTime>("CheckIn")
                         .HasColumnType("datetime2");
 
-                    b.Property<DateTime?>("CheckOut")
+                    b.Property<DateTime>("CheckOut")
                         .HasColumnType("datetime2");
 
                     b.Property<decimal>("Discount")
@@ -1182,7 +1182,7 @@ namespace HotelBookingSystem.EF.Migrations
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
-                            Type = 2
+                            Type = 0
                         },
                         new
                         {
@@ -1204,7 +1204,43 @@ namespace HotelBookingSystem.EF.Migrations
                         },
                         new
                         {
+                            Id = 25,
+                            BranchID = 2,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 26,
+                            BranchID = 2,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
+                        },
+                        new
+                        {
                             Id = 5,
+                            BranchID = 3,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BranchID = 3,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 27,
                             BranchID = 3,
                             IsBooked = false,
                             NumberOfAdults = 0,
@@ -1213,7 +1249,16 @@ namespace HotelBookingSystem.EF.Migrations
                         },
                         new
                         {
-                            Id = 6,
+                            Id = 75,
+                            BranchID = 3,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 28,
                             BranchID = 3,
                             IsBooked = false,
                             NumberOfAdults = 0,
@@ -1231,12 +1276,39 @@ namespace HotelBookingSystem.EF.Migrations
                         },
                         new
                         {
+                            Id = 29,
+                            BranchID = 4,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
                             Id = 8,
                             BranchID = 4,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
                             Type = 1
+                        },
+                        new
+                        {
+                            Id = 30,
+                            BranchID = 4,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 31,
+                            BranchID = 4,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
                         },
                         new
                         {
@@ -1258,6 +1330,33 @@ namespace HotelBookingSystem.EF.Migrations
                         },
                         new
                         {
+                            Id = 32,
+                            BranchID = 5,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 33,
+                            BranchID = 5,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 34,
+                            BranchID = 5,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
                             Id = 11,
                             BranchID = 6,
                             IsBooked = false,
@@ -1268,7 +1367,7 @@ namespace HotelBookingSystem.EF.Migrations
                         new
                         {
                             Id = 12,
-                            BranchID = 7,
+                            BranchID = 6,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
@@ -1276,8 +1375,35 @@ namespace HotelBookingSystem.EF.Migrations
                         },
                         new
                         {
+                            Id = 35,
+                            BranchID = 6,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 36,
+                            BranchID = 6,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 37,
+                            BranchID = 6,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
                             Id = 13,
-                            BranchID = 8,
+                            BranchID = 7,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
@@ -1286,7 +1412,7 @@ namespace HotelBookingSystem.EF.Migrations
                         new
                         {
                             Id = 14,
-                            BranchID = 9,
+                            BranchID = 7,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
@@ -1294,8 +1420,35 @@ namespace HotelBookingSystem.EF.Migrations
                         },
                         new
                         {
+                            Id = 38,
+                            BranchID = 7,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 39,
+                            BranchID = 7,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 40,
+                            BranchID = 7,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
+                        },
+                        new
+                        {
                             Id = 15,
-                            BranchID = 10,
+                            BranchID = 8,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
@@ -1304,7 +1457,7 @@ namespace HotelBookingSystem.EF.Migrations
                         new
                         {
                             Id = 16,
-                            BranchID = 11,
+                            BranchID = 8,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
@@ -1312,8 +1465,35 @@ namespace HotelBookingSystem.EF.Migrations
                         },
                         new
                         {
+                            Id = 41,
+                            BranchID = 8,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 42,
+                            BranchID = 8,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 43,
+                            BranchID = 8,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
                             Id = 17,
-                            BranchID = 12,
+                            BranchID = 9,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
@@ -1322,7 +1502,7 @@ namespace HotelBookingSystem.EF.Migrations
                         new
                         {
                             Id = 18,
-                            BranchID = 13,
+                            BranchID = 9,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
@@ -1330,8 +1510,35 @@ namespace HotelBookingSystem.EF.Migrations
                         },
                         new
                         {
+                            Id = 44,
+                            BranchID = 9,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 45,
+                            BranchID = 9,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 46,
+                            BranchID = 9,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
                             Id = 19,
-                            BranchID = 13,
+                            BranchID = 10,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
@@ -1340,11 +1547,263 @@ namespace HotelBookingSystem.EF.Migrations
                         new
                         {
                             Id = 20,
+                            BranchID = 10,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 47,
+                            BranchID = 10,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 48,
+                            BranchID = 10,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 49,
+                            BranchID = 10,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 50,
+                            BranchID = 11,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 51,
+                            BranchID = 11,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 52,
+                            BranchID = 11,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 53,
+                            BranchID = 11,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 54,
+                            BranchID = 11,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 55,
+                            BranchID = 12,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 56,
+                            BranchID = 12,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 57,
+                            BranchID = 12,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 58,
+                            BranchID = 12,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 59,
+                            BranchID = 12,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 60,
                             BranchID = 13,
                             IsBooked = false,
                             NumberOfAdults = 0,
                             NumberOfChilds = 0,
                             Type = 1
+                        },
+                        new
+                        {
+                            Id = 61,
+                            BranchID = 13,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 62,
+                            BranchID = 13,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 63,
+                            BranchID = 13,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 64,
+                            BranchID = 13,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 65,
+                            BranchID = 14,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 66,
+                            BranchID = 14,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 67,
+                            BranchID = 14,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 68,
+                            BranchID = 14,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 69,
+                            BranchID = 14,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 70,
+                            BranchID = 15,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 71,
+                            BranchID = 15,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 2
+                        },
+                        new
+                        {
+                            Id = 72,
+                            BranchID = 15,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 1
+                        },
+                        new
+                        {
+                            Id = 73,
+                            BranchID = 15,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
+                        },
+                        new
+                        {
+                            Id = 74,
+                            BranchID = 15,
+                            IsBooked = false,
+                            NumberOfAdults = 0,
+                            NumberOfChilds = 0,
+                            Type = 0
                         });
                 });
 
@@ -1378,28 +1837,28 @@ namespace HotelBookingSystem.EF.Migrations
                         new
                         {
                             Id = "1",
-                            ConcurrencyStamp = "de281d21-a2e8-4420-8c59-578be05c9dfc",
+                            ConcurrencyStamp = "98fcef8e-588d-4f7a-9d81-76e046b7f2fe",
                             Name = "Customer",
                             NormalizedName = "CUSTOMER"
                         },
                         new
                         {
                             Id = "2",
-                            ConcurrencyStamp = "6f574a69-e2dc-41ef-8be2-a7a81a14aa0f",
+                            ConcurrencyStamp = "20ab9030-d194-4d0f-b789-bc08e1bc92a9",
                             Name = "Employee",
                             NormalizedName = "EMPLOYEE"
                         },
                         new
                         {
                             Id = "3",
-                            ConcurrencyStamp = "03fe4ebc-d360-4ed1-baf5-f65989a3e3c5",
+                            ConcurrencyStamp = "2ccf3f77-be41-47a6-82b7-268cbbd25b5e",
                             Name = "Admin",
                             NormalizedName = "ADMIN"
                         },
                         new
                         {
                             Id = "4",
-                            ConcurrencyStamp = "858feda0-7857-45e8-8eab-ce74a4f7d5f4",
+                            ConcurrencyStamp = "db829f19-7bbc-4ecd-a89a-c9d3b85c8821",
                             Name = "SuperAdmin",
                             NormalizedName = "SUPERADMIN"
                         });

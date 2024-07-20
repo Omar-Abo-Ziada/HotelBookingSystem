@@ -1,12 +1,6 @@
 ﻿using HotelBookingSystem.Core.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Emit;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace HotelBookingSystem.EF.Configurations
 {
@@ -14,7 +8,7 @@ namespace HotelBookingSystem.EF.Configurations
     {
         public void Configure(EntityTypeBuilder<Hotel> builder)
         {
-            // Initial data for Hotel
+            // Initial Testing data for Hotels
             builder.HasData(
                 new Hotel { ID = 1, Name = "Hotel A" },
                 new Hotel { ID = 2, Name = "Hotel B" },

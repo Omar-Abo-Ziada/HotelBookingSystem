@@ -1,0 +1,97 @@
+﻿@model HotelBookingSystem.Core.DTOs.PostBookingDTO
+
+<form asp-action="SubmitBooking" method="post">
+  <div asp-validation-summary="All" class="text-danger"></div>
+
+    <div class="form-group" hidden >
+        <label asp-for="customerID" class="control-label" ></label>
+        <input asp-for="customerID" class="form-control"  />
+        <span asp-validation-for="customerID" class="text-danger"></span>
+    </div>
+
+    <div class="form-group" hidden >
+        <label asp-for="BranchID" class="control-label" ></label>
+        <input asp-for="BranchID" class="form-control"  />
+        <span asp-validation-for="BranchID" class="text-danger"></span>
+    </div>
+    <div class="form-group" hidden>
+        <label asp-for="CheckIn" class="control-label" ></label>
+        <input asp-for="CheckIn" class="form-control"  />
+        <span asp-validation-for="CheckIn" class="text-danger"></span>
+    </div>
+    <div class="form-group" hidden>
+        <label asp-for="CheckOut" class="control-label" ></label>
+        <input asp-for="CheckOut" class="form-control"  />
+        <span asp-validation-for="CheckOut" class="text-danger"></span>
+    </div>
+    <div class="form-group" hidden>
+        <label asp-for="NumberOfRooms" class="control-label"  ></label>
+        <input asp-for="NumberOfRooms" class="form-control" />
+        <span asp-validation-for="NumberOfRooms" class="text-danger" ></span>
+    </div>
+
+   @* ------------------------------------------------------------------------------ *@
+
+    @for (var i = 0; i < Model.NumberOfRooms; i++)
+    {
+        <div class="room-details">
+            <h4>Room @(i + 1)</h4>
+
+            <div class="form-group">
+                <label for="postRoomDTOs[@i].Type">Choose the room type:</label>
+                <select class="form-control" id="postRoomDTOs[@i].Type" name="postRoomDTOs[@i].Type">
+                    <option value="0">Single</option>
+                    <option value="1">Double</option>
+                    <option value="2">Suite</option>
+                </select>
+            </div>
+
+            <label>Number of Adults:</label>
+            <input name="postRoomDTOs[@i].NumberOfAdults" type="number" required />
+
+            <label>Number of Children:</label>
+            <input name="postRoomDTOs[@i].NumberOfChilds" type="number" required />
+        </div>
+    }
+
+    <button type="submit">Submit Booking</button>
+</form>
+
+@* 
+<form asp-action="BookRooms" asp-controller="Hotel" method="post">
+    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+    <div class="form-group">
+        <label asp-for="customerID" class="control-label" hidden></label>
+        <input asp-for="customerID" class="form-control" hidden />
+        <span asp-validation-for="customerID" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BranchID" class="control-label" hidden></label>
+        <input asp-for="BranchID" class="form-control" hidden />
+        <span asp-validation-for="BranchID" class="text-danger"></span>
+    </div>
+
+
+    <div class="form-group">
+        <label asp-for="CheckIn" class="control-label"></label>
+        <input asp-for="CheckIn" class="form-control" />
+        <span asp-validation-for="CheckIn" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="CheckOut" class="control-label"></label>
+        <input asp-for="CheckOut" class="form-control" />
+        <span asp-validation-for="CheckOut" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <label asp-for="NumberOfRooms" class="control-label"></label>
+        <input asp-for="NumberOfRooms" class="form-control" />
+        <span asp-validation-for="NumberOfRooms" class="text-danger"></span>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Continue" class="btn btn-primary" />
+    </div>
+</form> *@

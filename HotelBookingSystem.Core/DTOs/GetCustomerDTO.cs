@@ -21,22 +21,14 @@ namespace HotelBookingSystem.Core.DTOs
 
         public AgeCategory AgeCategory { get; set; }
 
-        public bool IsPreviousCutomer { get; set; } = false;
-
-        public DateTime? CheckIn { get; set; }
-
-        public DateTime? CheckOut { get; set; }
-
-        public int? NumberOfRooms { get; set; }
+        //public bool IsPreviousCustomer { get; set; } = false;
 
         //-------------------------------------
 
-        public int? RoomID { get; set; }
+        //public ApplicationUser? ApplicationUser { get; set; }
 
         //-------------------------------------
 
-        public int BranchID { get; set; }
-
-        //-------------------------------------
+        //public ICollection<CustomerBooking>? CustomerBookings { get; set; } = new HashSet<CustomerBooking>();
     }
 }

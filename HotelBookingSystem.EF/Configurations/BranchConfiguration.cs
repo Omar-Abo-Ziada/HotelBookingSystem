@@ -8,7 +8,7 @@ namespace HotelBookingSystem.EF.Configurations
     {
         public void Configure(EntityTypeBuilder<Branch> builder)
         {
-            // Initial data for Branches
+            // Initial Testing data for Branches
             builder.HasData(
                 // Branches for Hotel A
                 new Branch { ID = 1, Country = "Country1", State = "State1", City = "City1", Street = "Street1", PostalCode = "12345", HotelID = 1 },

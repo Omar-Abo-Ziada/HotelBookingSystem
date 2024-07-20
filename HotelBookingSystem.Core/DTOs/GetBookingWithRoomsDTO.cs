@@ -2,7 +2,7 @@
 
 namespace HotelBookingSystem.Core.DTOs
 {
-    public class GetBookingDTO
+    public class GetBookingWithRoomsDTO
     {
         public int ID { get; set; }
 
@@ -17,7 +17,7 @@ namespace HotelBookingSystem.Core.DTOs
 
         //---------------------------------------------
 
-        //public ICollection<Room> Rooms { get; set; } = new HashSet<Room>();
+        public ICollection<GetRoomDTO> Rooms { get; set; } = new HashSet<GetRoomDTO>();
 
         //---------------------------------------------
 

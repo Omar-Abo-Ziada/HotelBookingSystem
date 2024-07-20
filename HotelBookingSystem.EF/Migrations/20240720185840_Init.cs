@@ -220,8 +220,8 @@ namespace HotelBookingSystem.EF.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CheckIn = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    CheckOut = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    CheckIn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CheckOut = table.Column<DateTime>(type: "datetime2", nullable: false),
                     Discount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     IsPreviousCustomer = table.Column<bool>(type: "bit", nullable: false),
                     BranchID = table.Column<int>(type: "int", nullable: false)
@@ -290,6 +290,7 @@ namespace HotelBookingSystem.EF.Migrations
                     Type = table.Column<int>(type: "int", nullable: false),
                     NumberOfAdults = table.Column<int>(type: "int", nullable: false),
                     NumberOfChilds = table.Column<int>(type: "int", nullable: false),
+                    IsBooked = table.Column<bool>(type: "bit", nullable: false),
                     BranchID = table.Column<int>(type: "int", nullable: false),
                     BookingID = table.Column<int>(type: "int", nullable: true)
                 },
@@ -333,10 +334,10 @@ namespace HotelBookingSystem.EF.Migrations
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { "1", "fe0f81c0-e65e-4f06-93db-f4ebfd47b80e", "Customer", "CUSTOMER" },
-                    { "2", "5672a166-aea2-4a29-a728-8703ab29576e", "Employee", "EMPLOYEE" },
-                    { "3", "807771d3-8839-4af2-a750-688331a5a5e2", "Admin", "ADMIN" },
-                    { "4", "24b4a14e-0dd9-4265-af23-b233bc35ac18", "SuperAdmin", "SUPERADMIN" }
+                    { "1", "98fcef8e-588d-4f7a-9d81-76e046b7f2fe", "Customer", "CUSTOMER" },
+                    { "2", "20ab9030-d194-4d0f-b789-bc08e1bc92a9", "Employee", "EMPLOYEE" },
+                    { "3", "2ccf3f77-be41-47a6-82b7-268cbbd25b5e", "Admin", "ADMIN" },
+                    { "4", "db829f19-7bbc-4ecd-a89a-c9d3b85c8821", "SuperAdmin", "SUPERADMIN" }
                 });
 
             migrationBuilder.InsertData(
@@ -464,40 +465,98 @@ namespace HotelBookingSystem.EF.Migrations
 
             migrationBuilder.InsertData(
                 table: "Rooms",
-                columns: new[] { "Id", "BookingID", "BranchID", "NumberOfAdults", "NumberOfChilds", "Type" },
+                columns: new[] { "Id", "BookingID", "BranchID", "IsBooked", "NumberOfAdults", "NumberOfChilds", "Type" },
                 values: new object[,]
                 {
-                    { 1, null, 1, 0, 0, 0 },
-                    { 2, null, 1, 0, 0, 0 },
-                    { 3, null, 2, 0, 0, 2 },
-                    { 4, null, 2, 0, 0, 0 },
-                    { 5, null, 3, 0, 0, 1 },
-                    { 6, null, 3, 0, 0, 2 },
-                    { 7, null, 4, 0, 0, 0 },
-                    { 8, null, 4, 0, 0, 1 },
-                    { 9, null, 5, 0, 0, 2 }
+                    { 1, null, 1, false, 0, 0, 0 },
+                    { 2, null, 1, false, 0, 0, 0 },
+                    { 3, null, 2, false, 0, 0, 0 },
+                    { 4, null, 2, false, 0, 0, 0 },
+                    { 5, null, 3, false, 0, 0, 0 },
+                    { 6, null, 3, false, 0, 0, 0 },
+                    { 7, null, 4, false, 0, 0, 0 },
+                    { 8, null, 4, false, 0, 0, 1 },
+                    { 9, null, 5, false, 0, 0, 2 }
                 });
 
             migrationBuilder.InsertData(
                 table: "Rooms",
-                columns: new[] { "Id", "BookingID", "BranchID", "NumberOfAdults", "NumberOfChilds", "Type" },
+                columns: new[] { "Id", "BookingID", "BranchID", "IsBooked", "NumberOfAdults", "NumberOfChilds", "Type" },
                 values: new object[,]
                 {
-                    { 10, null, 5, 0, 0, 0 },
-                    { 11, null, 6, 0, 0, 1 },
-                    { 12, null, 7, 0, 0, 2 },
-                    { 13, null, 8, 0, 0, 0 },
-                    { 14, null, 9, 0, 0, 1 },
-                    { 15, null, 10, 0, 0, 2 },
-                    { 16, null, 11, 0, 0, 0 },
-                    { 17, null, 12, 0, 0, 1 },
-                    { 18, null, 13, 0, 0, 2 },
-                    { 19, null, 13, 0, 0, 0 },
-                    { 20, null, 13, 0, 0, 1 },
-                    { 21, null, 1, 0, 0, 1 },
-                    { 22, null, 1, 0, 0, 1 },
-                    { 23, null, 1, 0, 0, 2 },
-                    { 24, null, 2, 0, 0, 1 }
+                    { 10, null, 5, false, 0, 0, 0 },
+                    { 11, null, 6, false, 0, 0, 1 },
+                    { 12, null, 6, false, 0, 0, 2 },
+                    { 13, null, 7, false, 0, 0, 0 },
+                    { 14, null, 7, false, 0, 0, 1 },
+                    { 15, null, 8, false, 0, 0, 2 },
+                    { 16, null, 8, false, 0, 0, 0 },
+                    { 17, null, 9, false, 0, 0, 1 },
+                    { 18, null, 9, false, 0, 0, 2 },
+                    { 19, null, 10, false, 0, 0, 0 },
+                    { 20, null, 10, false, 0, 0, 1 },
+                    { 21, null, 1, false, 0, 0, 1 },
+                    { 22, null, 1, false, 0, 0, 1 },
+                    { 23, null, 1, false, 0, 0, 2 },
+                    { 24, null, 2, false, 0, 0, 1 },
+                    { 25, null, 2, false, 0, 0, 1 },
+                    { 26, null, 2, false, 0, 0, 2 },
+                    { 27, null, 3, false, 0, 0, 1 },
+                    { 28, null, 3, false, 0, 0, 2 },
+                    { 29, null, 4, false, 0, 0, 0 },
+                    { 30, null, 4, false, 0, 0, 1 },
+                    { 31, null, 4, false, 0, 0, 2 },
+                    { 32, null, 5, false, 0, 0, 0 },
+                    { 33, null, 5, false, 0, 0, 1 },
+                    { 34, null, 5, false, 0, 0, 1 },
+                    { 35, null, 6, false, 0, 0, 1 },
+                    { 36, null, 6, false, 0, 0, 0 },
+                    { 37, null, 6, false, 0, 0, 0 },
+                    { 38, null, 7, false, 0, 0, 1 },
+                    { 39, null, 7, false, 0, 0, 0 },
+                    { 40, null, 7, false, 0, 0, 2 },
+                    { 41, null, 8, false, 0, 0, 0 },
+                    { 42, null, 8, false, 0, 0, 1 },
+                    { 43, null, 8, false, 0, 0, 1 },
+                    { 44, null, 9, false, 0, 0, 1 },
+                    { 45, null, 9, false, 0, 0, 0 },
+                    { 46, null, 9, false, 0, 0, 0 },
+                    { 47, null, 10, false, 0, 0, 0 },
+                    { 48, null, 10, false, 0, 0, 1 },
+                    { 49, null, 10, false, 0, 0, 2 },
+                    { 50, null, 11, false, 0, 0, 1 },
+                    { 51, null, 11, false, 0, 0, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rooms",
+                columns: new[] { "Id", "BookingID", "BranchID", "IsBooked", "NumberOfAdults", "NumberOfChilds", "Type" },
+                values: new object[,]
+                {
+                    { 52, null, 11, false, 0, 0, 1 },
+                    { 53, null, 11, false, 0, 0, 0 },
+                    { 54, null, 11, false, 0, 0, 0 },
+                    { 55, null, 12, false, 0, 0, 1 },
+                    { 56, null, 12, false, 0, 0, 2 },
+                    { 57, null, 12, false, 0, 0, 1 },
+                    { 58, null, 12, false, 0, 0, 0 },
+                    { 59, null, 12, false, 0, 0, 0 },
+                    { 60, null, 13, false, 0, 0, 1 },
+                    { 61, null, 13, false, 0, 0, 2 },
+                    { 62, null, 13, false, 0, 0, 1 },
+                    { 63, null, 13, false, 0, 0, 0 },
+                    { 64, null, 13, false, 0, 0, 0 },
+                    { 65, null, 14, false, 0, 0, 1 },
+                    { 66, null, 14, false, 0, 0, 2 },
+                    { 67, null, 14, false, 0, 0, 1 },
+                    { 68, null, 14, false, 0, 0, 0 },
+                    { 69, null, 14, false, 0, 0, 0 },
+                    { 70, null, 15, false, 0, 0, 1 },
+                    { 71, null, 15, false, 0, 0, 2 },
+                    { 72, null, 15, false, 0, 0, 1 },
+                    { 73, null, 15, false, 0, 0, 0 },
+                    { 74, null, 15, false, 0, 0, 0 },
+                    { 75, null, 3, false, 0, 0, 1 }
                 });
 
             migrationBuilder.InsertData(
