@@ -126,6 +126,7 @@ namespace HotelBookingSystem.MVC.Controllers
                 return RedirectToAction("Register", "Account");
             }
 
+
             //------------------------------------------
 
             List<GetBookingDTO> getBookingDTOs = new List<GetBookingDTO>();
