@@ -71,7 +71,7 @@ This web application allows users to book hotel rooms, browse available hotels, 
 - **Room Availability**: Checks if the requested rooms are available at the selected branch and of the desired type.
 - **Number of Rooms**: Must be greater than zero and less than ten. Errors will be added to the model state to inform the user.
 - **Checkin Date**: Must be Later than the Date of Now.
-- - **Checkout Date**: Must be Later than the Checkin.
+- **Checkout Date**: Must be Later than the Checkin.
 
 
 
