@@ -99,5 +99,5 @@ For more details about the ERD you can see it after in Database Diagrams after U
 
 ## Contact
 
-For any questions or feedback, please contact [Omar Ahmed Abo Ziada Email](mailto:o.ahmed9847@gmail.com).
-Phone : +20 115 935 1955
+For any questions or feedback, please contact [Omar Ahmed Abo Ziada](mailto:o.ahmed9847@gmail.com).
+Phone: +20 115 935 1955
